@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Administrative">
+    <resultMap id="administrative_resultMap" type="Administrative">
+        <result column="admin_code" property="adminCode"/>
+        <result column="admin_name" property="adminName"/>
+        <result column="parent_code" property="parentCode"/>
+        <result column="admin_level" property="adminLevel"/>
+    </resultMap>
+
+    <sql id="current_table">sys_area</sql>
+    <sql id="all_column">admin_code,admin_name,parent_code,admin_level</sql>
+
+    <sql id="select_main_body">SELECT
+        <include refid="all_column"/>
+        FROM
+        <include refid="current_table"/>
+    </sql>
+
+    <select id="select_admin_all" resultMap="administrative_resultMap">
+        <include refid="select_main_body"/>
+    </select>
+
+    <select id="select_children" resultMap="administrative_resultMap" parameterType="String">
+        <include refid="select_main_body"/>
+        WHERE parent_code = #{param1}
+    </select>
+</mapper>

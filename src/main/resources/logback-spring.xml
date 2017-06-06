@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- scanPeriod-表示扫描周期, 默认1 minutes, 此处即表示项目正常使用过程中会每7秒重新扫描一次该配置文件,
+    unit: milliseconds, seconds, minutes or hours -->
+<!-- debug-为true表示启动时会在控制台打印slf4j的启动日志 -->
+<!-- scan-当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true -->
+<configuration debug="true" scan="true" scanPeriod="7 seconds">
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springboot.sample" level="TRACE"/>
+
+    <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
+    <springProfile name="test,dev">
+        <logger name="org.springframework.web" level="INFO"/>
+        <logger name="org.springboot.sample" level="INFO"/>
+    </springProfile>
+
+
+    <!-- 生产环境. -->
+    <springProfile name="prod">
+        <logger name="org.springframework.web" level="ERROR"/>
+        <logger name="org.springboot.sample" level="ERROR"/>
+    </springProfile>
+</configuration>

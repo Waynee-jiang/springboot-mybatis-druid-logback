@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="SLF4J"/>
+        <setting name="callSettersOnNulls" value="true"/>
+        <!-- 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <typeAliases>
+        <!-- 批量定义别名 ，指定包名，自动扫描包中的类，别名即为类名，首字母大小写无所谓-->
+        <typeAlias alias="Base" type="pers.lyks.spring.boot.model.BaseModel"/>
+        <typeAlias alias="Administrative" type="pers.lyks.spring.boot.model.area.AdministrativeModel"/>
+    </typeAliases>
+    <mappers>
+        <!-- 加载映射文件 -->
+        <!-- 这里也可以使用class来加载映射文件，前提是：使用mapper代理的方法，遵循规范，
+        并且两个文件必须同名且在同一目录基于class加载，可以进行批量加载-->
+        <!-- 通过扫描包的方式来进行批量加载映射文件 -->
+        <mapper resource="pers/lyks/spring/boot/mapper/BaseMapper.xml"/>
+        <mapper resource="pers/lyks/spring/boot/mapper/area/AdministrativeMapper.xml"/>
+    </mappers>
+</configuration>
