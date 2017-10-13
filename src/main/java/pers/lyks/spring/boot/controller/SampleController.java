@@ -23,7 +23,7 @@ public class SampleController extends BaseController {
     }
 
 
-    @RequestMapping("/hello")
+    @RequestMapping(value="/hello",method = RequestMethod.POST)
     @ResponseBody
     String hello(@RequestParam(value = "name", defaultValue = "world") String name) {
         return "hello " + name;
